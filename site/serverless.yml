@@ -1,0 +1,10 @@
+component: website
+app: gyrfalcon
+name: site
+
+inputs:
+  src:
+    src: ./
+    hook: npm run build
+    dist: build
+    domain: ${env:domain}
