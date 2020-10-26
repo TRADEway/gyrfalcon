@@ -1,0 +1,36 @@
+component: aws-dynamodb
+app: gyrfalcon
+name: database
+
+inputs:
+  name: ${name}-${stage}
+  region: us-east-1
+  # Don't delete the Database Table if "serverless remove" is run
+  deletionPolicy: retain
+  # Single-table design, heavily influenced by Alex DeBrie
+  attributeDefinitions:
+    - AttributeName: PK
+      AttributeType: S
+    - AttributeName: SK
+      AttributeType: S
+    - AttributeName: GSI1PK
+      AttributeType: S
+    - AttributeName: GSI1SK
+      AttributeType: S
+  keySchema:
+    - AttributeName: PK
+      KeyType: HASH
+    - AttributeName: SK
+      KeyType: RANGE
+  billingMode: PAY_PER_REQUEST
+  streamSpecification:
+    streamViewType: NEW_IMAGE
+  globalSecondaryIndexes:
+    - IndexName: GSI1
+      KeySchema:
+        - AttributeName: GSI1PK
+          KeyType: HASH
+        - AttributeName: GSI1SK
+          KeyType: RANGE
+      Projection:
+        ProjectionType: ALL
