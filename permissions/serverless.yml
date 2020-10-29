@@ -3,7 +3,7 @@ app: gyrfalcon
 name: permissions
 
 inputs:
-  name: ${name}-${stage}
+  name: ${app}-${name}-${stage}
   region: us-east-1
   service: lambda.amazonaws.com
   policy:
@@ -15,3 +15,19 @@ inputs:
         - logs:CreateLogStream
         - logs:PutLogEvents
       Resource: "*"
+    - Effect: Allow
+      Action:
+        - dynamodb:BatchWriteItem
+        - dynamodb:ConditionCheckItem
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:Scan
+        - dynamodb:Query
+        - dynamodb:UpdateItem
+      Resource:
+        - ${output:database.arn}
+        - ${output:database.indexes.CallIndex.arn}
+        - ${output:database.indexes.ExtensionIndex.arn}
+        - ${output:database.indexes.GSI1.arn}
+        - ${output:database.indexes.PhoneLineIndex.arn}
+        - ${output:database.indexes.UserIndex.arn}
