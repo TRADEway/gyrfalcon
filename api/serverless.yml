@@ -9,3 +9,14 @@ inputs:
   roleName: ${output:permissions.name}
   # Enable this when you want to set a custom domain.
   domain: api.${env:domain}
+  env:
+    # AWS DynamoDB Table name. Needed for the code to access it.
+    db: ${output:database.name}
+    # AWS DynamoDB Table Index name. Needed for the code to access it.
+    dbIndex1: ${output:database.indexes.GSI1.name}
+    # A secret token to sign the JWT tokens with.
+    tokenSecret: ${env:tokenSecret}
+    # Twilio API authentication. 
+    # If unset you'll likely get the error "username is required"
+    TWILIO_ACCOUNT_SID: ${env:TWILIO_ACCOUNT_SID}
+    TWILIO_AUTH_TOKEN: ${env:TWILIO_AUTH_TOKEN}
