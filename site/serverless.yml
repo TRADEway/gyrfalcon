@@ -6,5 +6,5 @@ inputs:
   src:
     src: ./
     hook: npm run build
-    dist: build
-    domain: ${env:domain}
+    dist: ./dist
+  domain: ${env:domain}
