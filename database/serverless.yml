@@ -3,7 +3,7 @@ app: gyrfalcon
 name: database
 
 inputs:
-  name: ${name}-${stage}
+  name: ${app}-${name}-${stage}
   region: us-east-1
   # Don't delete the Database Table if "serverless remove" is run
   deletionPolicy: retain
@@ -16,6 +16,14 @@ inputs:
     - AttributeName: GSI1PK
       AttributeType: S
     - AttributeName: GSI1SK
+      AttributeType: S
+    - AttributeName: CallIndex
+      AttributeType: S
+    - AttributeName: ExtensionIndex
+      AttributeType: S
+    - AttributeName: PhoneLineIndex
+      AttributeType: S
+    - AttributeName: UserIndex
       AttributeType: S
   keySchema:
     - AttributeName: PK
@@ -32,5 +40,29 @@ inputs:
           KeyType: HASH
         - AttributeName: GSI1SK
           KeyType: RANGE
+      Projection:
+        ProjectionType: ALL
+    - IndexName: CallIndex
+      KeySchema:
+        - AttributeName: CallIndex
+          KeyType: HASH
+      Projection:
+        ProjectionType: ALL
+    - IndexName: ExtensionIndex
+      KeySchema:
+        - AttributeName: ExtensionIndex
+          KeyType: HASH
+      Projection:
+        ProjectionType: ALL
+    - IndexName: PhoneLineIndex
+      KeySchema:
+        - AttributeName: PhoneLineIndex
+          KeyType: HASH
+      Projection:
+        ProjectionType: ALL
+    - IndexName: UserIndex
+      KeySchema:
+        - AttributeName: UserIndex
+          KeyType: HASH
       Projection:
         ProjectionType: ALL
