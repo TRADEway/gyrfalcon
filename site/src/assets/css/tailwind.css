@@ -1,0 +1,12 @@
+/* In your CSS */
+:root {
+  --color-primary: #EE6C4D;
+  --color-secondary: #3D5A80;
+  --color-accent-1: #98C1D9;
+  --color-accent-2: #E0FBFC;
+  --color-accent-3: #293241;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
